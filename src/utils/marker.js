@@ -45,15 +45,23 @@ class Marker {
 
   mark() {
    this.highlight();
-   const markers = Array.from(document.getElementsByTagName('mark'));
-   const markersInnerHTML = markers.map((marker, index) => ({innerHTML: marker.innerHTML, id: index}));
-    window.localStorage.setItem('markersJSON', JSON.stringify(markersInnerHTML));
-   const serialized = this.highlighter.serialize();
-   window.localStorage.setItem('highlights', serialized);
+   this.saveMarkers();
+   saveMarkersAsJSON();
   }
 
   unmark() {
     this.highlighter.unhighlightSelection();
+    this.saveMarkers();
+    saveMarkersAsJSON();
+  }
+
+  saveMarkersAsJSON() {
+    const markers = Array.from(document.getElementsByTagName('mark'));
+    const markersInnerHTML = markers.map((marker, index) => ({innerHTML: marker.innerHTML, id: index}));
+    window.localStorage.setItem('markersJSON', JSON.stringify(markersInnerHTML));
+  }
+
+  saveMarkers() {
     const serialized = this.highlighter.serialize();
     window.localStorage.setItem('highlights', serialized);
   }
