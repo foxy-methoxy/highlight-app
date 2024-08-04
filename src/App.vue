@@ -25,7 +25,7 @@ const wrapper = {
 
 <template>
   <button @click="select">Mark</button>
-  <button @click="unselect ">Unmark</button>
+  <button @click="unselect">Unmark</button>
   <div id='text' data-selectable>
     <p v-for="item in text" :key="item.id" v-html="item.text"></p>
   </div>
